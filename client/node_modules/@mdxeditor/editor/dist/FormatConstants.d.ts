@@ -1,0 +1,9 @@
+export declare const DEFAULT_FORMAT: 0;
+export declare const IS_BOLD: 1;
+export declare const IS_ITALIC: 2;
+export declare const IS_STRIKETHROUGH: 4;
+export declare const IS_UNDERLINE: 8;
+export declare const IS_CODE: 16;
+export declare const IS_SUBSCRIPT: 32;
+export declare const IS_SUPERSCRIPT: 64;
+export declare const IS_HIGHLIGHT: 128;

@@ -1,0 +1,191 @@
+@use "../../../mixin.scss" as mixin;
+
+.main_sidenav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 18rem;
+    transition: ease-in-out 0.3s;
+    position: sticky;
+    top: 0.5rem;
+
+    height: 100%;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    border-radius: 2rem;
+    flex: 0 0 auto;
+    padding: 1rem;
+
+    .profile_dropdown {
+        height: 3rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        .avatar, .avatar img {
+            height: 100%;
+        }
+        .content {
+            .name {
+                font-weight: 600;
+            }
+            .role {
+                font-size: 0.9em;
+                color: mixin.$gray-100;
+            }
+        }
+        .arrow_down {
+            margin-left: auto;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        font-size: 1em;
+        color: black;
+        p {
+            margin: 0;
+        }
+    
+        li {
+            height: 3rem;
+            display: flex;
+            padding: 0 0.5rem;
+            &:hover {
+                p {
+                    font-weight: 600;
+                    transition: 0.3s ease all;
+                }
+            }
+            &.active {
+                background-color: white;
+                color: mixin.$black-100;
+                border-radius: 5rem;
+                box-shadow: mixin.$medium-shadow;
+                font-weight: 600;
+                transition: 0.3s ease all;
+            }
+            a {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: inherit;
+                color: inherit;
+                width: 100%;
+
+
+                .tag {
+                    margin-left: auto;
+                    font-size: 0.8em;
+                    min-width: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: black;
+                    color: white;
+                    border-radius: 1rem;
+                }
+            }
+        }
+    }
+
+    .next_activity_widget {
+        margin-top: auto;
+        background: #ffffff;
+        border-radius: 1rem;
+        padding: 0.8rem;
+        display: flex;
+        gap: 2rem;
+        box-shadow: mixin.$medium-shadow;
+
+        .date {
+            display: flex;
+            flex-direction: column;
+
+            .month {
+                margin: 0;
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: #404040;
+            }
+            .day {
+                font-size: 2rem;
+                font-weight: 600;
+            }
+        }
+
+        .next_activity {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: mixin.$blue-100;
+            color: white;
+            display: flex;
+            flex-direction: column;  
+            height: 5rem;
+
+
+            .title, .time {
+                font-size: 0.8rem;
+            }
+
+            .time_left {
+                font-size: 0.8rem;
+                color: rgb(255 255 255 / 50%);
+                margin-top: auto;
+            }
+        }
+    }
+
+    .profile_dropdown .content, .profile_dropdown .arrow_down, ul li a p, ul li a .tag, .next_activity_widget {
+        opacity: 1;
+        transition: all 1s;
+    }
+    &.closed {
+        width: 5rem;
+        .profile_dropdown .content, .profile_dropdown .arrow_down, ul li a p, ul li a .tag, .next_activity_widget {
+            opacity: 0; 
+            display: none;
+        }
+
+        ul li a {
+            justify-content: center;
+        }
+    }
+
+    @include mixin.tablet {
+        ul {
+            font-size: 1.5em;
+        }
+    }
+
+    @include mixin.mobile {
+        position: fixed;
+        top: unset;
+        bottom: 0;
+        left: 0;
+        margin: 0.5rem;
+        min-height: unset !important;
+        height: 5rem;
+        width: calc(100% - 1rem) !important;
+        flex-direction: row;
+        gap: 2.5rem;
+        background-color: mixin.$black-100;
+
+        ul {
+            display: flex;
+            flex: 1;
+            justify-content: space-around;
+            color: white;
+        }
+
+        .profile_dropdown {
+            .avatar, .avatar img {
+                height: 100%;
+                background-color: white;
+                border-radius: 50%;
+            }
+        }
+    }
+}

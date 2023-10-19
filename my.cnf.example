@@ -1,0 +1,17 @@
+# /etc/my.cnf
+[client]
+user=root
+password=|PASSWORD|
+
+# host for cygwin och äldre WSL
+# host=project_pulse_db
+
+# host for WSL2 bash, change <hostname> to its real value
+#host=<hostname>.local
+
+#port=3306
+#protocol=tcp
+
+[mysql]
+# To allow for using LOAD DATA INFILE
+loose-local-infile = 1

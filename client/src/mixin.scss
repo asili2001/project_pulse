@@ -1,0 +1,39 @@
+$green-100: #25A2A9;
+$green-100-20: lighten($green-100, 20%);
+
+// $blue-100: #3399ff;
+
+$blue-100: #3399ff;
+$blue-100-10: lighten($blue-100, 10%);
+$blue-100-20: lighten($blue-100, 20%);
+$blue-100-30: lighten($blue-100, 30%);
+$blue-100-35: lighten($blue-100, 35%);
+
+$red-100: #ff4b4b;
+
+$hub-background: radial-gradient(100% 60% at 20% 100%, $blue-100-20 0%, transparent 100%), linear-gradient(90deg, $blue-100-10 0%, #E9E4F0 100%);
+$medium-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.06), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+
+$black-100: #19161D;
+$black-200: lighten($black-100, 10%);
+
+$gray-100: #53575A;
+$gray-100-10: lighten($blue-100, 10%);
+
+@mixin tablet {
+    @media only screen and (max-width: 1000px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media only screen and (max-width: 500px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (max-width: 100rem) {
+        @content;
+    }
+}

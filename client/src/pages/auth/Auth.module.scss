@@ -1,0 +1,64 @@
+@use "../../mixin.scss" as mixin;
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    .banner {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 3rem;
+
+        >img {
+            width: 80%;
+            height: 80%;
+        }
+
+        .bannercontent {
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin: 0;
+                font-size: 1.1em;
+            }
+        }
+    }
+
+    .content {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+        justify-content: center;
+
+        >form {
+            width: 90%;
+
+        }
+        >img {
+            position: absolute;
+            bottom: 2rem;
+            height: 2.5rem;
+            display: none;
+        }
+    }
+
+    @include mixin.tablet {
+        .banner {
+            display: none;
+        }
+        .content {
+            width: 100%;
+            >img {
+                display: block;
+            }
+        }
+    }
+}

@@ -1,0 +1,99 @@
+@use "../../mixin.scss" as mixin;
+
+.container {
+    display: flex;
+    height: 25rem;
+    position: relative;
+    
+    .memberlist, .selected_member_form {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .selected_member_form {
+        .form_backbtn {
+            width: 3rem;
+            position: absolute;
+            bottom: 1rem;
+            font-size: 1.5em;
+            display: none;
+        }
+
+        @include mixin.mobile {
+            position: absolute;
+            left: 150%;
+            top: 0;
+            height: 25rem;
+            background-color: #ffffffc4;
+            border-radius: 1rem;
+            transition: 0.5s ease all;
+            backdrop-filter: blur(0.2em);
+            border: 1px solid #636363;
+
+            .form_backbtn {
+                display: flex;
+            }
+
+            &.active {
+                left: 0% !important;
+            }
+        }
+    }
+    
+    .memberlist {
+        height: auto;
+        padding: 0.5rem;
+        background-color: rgba(0, 152, 255, 0.1411764706);
+        border-radius: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-direction: column;
+        background-image: url("../../assets/csv-dragNdrop.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20%;
+        
+        >.ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+
+            >.li {
+                display: flex;
+                width: 100%;
+                height: 4rem;
+                padding: 0.5rem;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #008cff42;
+                border-radius: 0.5rem;
+                cursor: pointer;
+
+                &.selected {
+                    border: 0.2rem solid mixin.$black-200;
+                    padding: 0.3rem;
+                }
+
+                h3 {
+                    font-weight: bold;
+                }
+
+                .right {
+                    color: #0087ff;
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+
+.submit_container {
+    margin-top: 1rem;
+    width: 100%;
+    
+    >button {
+        width: inherit;
+    }
+}

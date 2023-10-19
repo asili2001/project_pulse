@@ -1,0 +1,11 @@
+.work_area {
+    min-height: calc(100vh - 0.8rem);
+    height: 100%;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    border-radius: 2rem;
+    flex: 0 0 auto;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}

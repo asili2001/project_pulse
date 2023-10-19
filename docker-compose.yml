@@ -1,0 +1,42 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "1337:1337"
+    networks:
+      - project_pulse
+    depends_on:
+      - database
+
+  # client:
+  #   build:
+  #     context: ./client
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - server
+
+  database:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - maria-data:/data/db
+    ports:
+      - "3306:3306"
+    networks:
+      - project_pulse
+
+
+networks:
+  project_pulse:
+    driver: bridge
+
+volumes:
+  maria-data:
+    driver: local
