@@ -39,9 +39,9 @@ const Dashboard = () => {
             content: <>
                 <ul>
                     {
-                        latestReportSubmissions.map(report => {
+                        latestReportSubmissions.map((report, index) => {
                             return (
-                                <li className="flex justify-around">
+                                <li key = {index} className="!grid !grid-cols-4">
                                     <div>
                                         <p className="font-bold text-blue-500">Name</p>
                                         <p>{report.user_name}</p>

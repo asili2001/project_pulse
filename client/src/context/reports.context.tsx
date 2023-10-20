@@ -16,7 +16,7 @@ export interface IReportContext {
     getMemberReports: (projectId: number, memberId: number) => Promise<ProjectReports | undefined>
     getTmMemberReports: (projectId: number) => Promise<ProjectReports | undefined>
     submitReport: (projectId: number, reportId: number, content: string) => Promise<boolean>
-    toggleReadReport: (projectId: number, reportId: number, userId: number) => Promise<boolean>
+    toggleReadReport: (projectId: number, reportId: number, userId: number) => Promise<IReport|undefined>
 }
 
 export const ReportContext = createContext<IReportContext>({
@@ -24,7 +24,7 @@ export const ReportContext = createContext<IReportContext>({
     getMemberReports: async () => { return undefined },
     getTmMemberReports: async () => { return undefined },
     submitReport: async () => { return false },
-    toggleReadReport: async () => { return false }
+    toggleReadReport: async () => { return undefined }
     
 });
 
@@ -136,15 +136,15 @@ export const ReportProvider: React.FC<IProps> = ({ children }) => {
             let result = await ProjectServices.toggleReadReport(signal, projectId, reportId, userId);
             
             if (result === "ABORTED" || typeof result === "string") {
-                return false;
+                return undefined;
             }
 
             if (!result) {
                 toast.error("Something Went Wrong ...");
-                return false;
+                return undefined;
             }
             let updatedReports = [...reports];
-            const reportsData = updatedReports.filter(report => report.projectId === projectId)[0].reportsData;
+            const reportsData = updatedReports.filter(report => report.projectId === projectId && report.memberId === userId)[0].reportsData;
             reportsData.map(report => {
                 if (report.id === reportId) {
                     report.is_read = !report.is_read
@@ -152,10 +152,10 @@ export const ReportProvider: React.FC<IProps> = ({ children }) => {
             });
 
             setReports([...updatedReports]);
-            return true;
+            return reportsData.filter(report => report.id === reportId)[0];
         } catch (error: any) {
             console.error(error.message);
-            return false;
+            return undefined;
         }
     }
 

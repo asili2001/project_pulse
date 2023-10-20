@@ -1,3 +1,5 @@
+DELIMITER //
+
 DROP TABLE IF EXISTS report_log;
 DROP TRIGGER IF EXISTS add_to_report_log;
 DROP VIEW IF EXISTS v_report_info;
@@ -8,9 +10,7 @@ CREATE TABLE IF NOT EXISTS report_log (
     report_id INT NOT NULL,
     project_id INT NOT NULL,
     submission_time INT
-);
-
-DELIMITER //
+)//
 
 CREATE TRIGGER add_to_report_log
 AFTER INSERT ON users_n_reports
@@ -22,6 +22,7 @@ END;
 //
 
 DELIMITER ;
+
 
 CREATE VIEW v_report_info AS
 SELECT

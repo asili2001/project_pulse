@@ -29,7 +29,14 @@ const MemberReports = (props: { projectId: number, memberId: number }) => {
 
     const handleToggleReadReport = async () => {
         if (!projectData || !selectedReport?.id || !member?.id) return;
-        await toggleReadReport(projectData?.id, selectedReport?.id, member?.id);
+        
+        const data = await toggleReadReport(projectData?.id, selectedReport?.id, member?.id);
+
+        if (data) {
+            const updatedSelectedReport = selectedReport;
+            
+            setSelectedReport(updatedSelectedReport);
+        }
 
     }
 
