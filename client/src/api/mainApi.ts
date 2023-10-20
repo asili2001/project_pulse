@@ -309,6 +309,33 @@ const ProjectServices = {
             return false;
         }
     },
+    getLatestReportSubmissions: async (signal: AbortSignal) => {
+        try {
+            // Simulate a delay (remove this in production)
+            // await delay(1000);
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/projects/latestReportSubmissions`, {
+                signal,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                return false;
+            }
+
+            const { result } = await response.json();
+
+            return result ?? [];
+        } catch (error) {
+            if (signal.aborted) return "ABORTED";
+            console.error(error);
+            return false;
+        }
+    },
 
     assignMembers: async (signal: AbortSignal, projectId: number, memberIds: number[]) => {
         try {

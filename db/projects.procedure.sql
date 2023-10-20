@@ -92,3 +92,6 @@ CREATE PROCEDURE ToggleReadReport(
 BEGIN
     UPDATE users_n_reports SET is_read = !is_read WHERE report_id = r_id AND user_id = u_id;
 END//
+
+call ToggleReadReport(1, 3);
+select * from users_n_reports where report_id = 1 AND user_id = 3;

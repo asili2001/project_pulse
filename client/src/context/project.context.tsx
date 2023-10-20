@@ -3,9 +3,11 @@ import { INewProject, IProject } from "../types/IProject";
 import { ProjectServices } from "../api/mainApi";
 import IReport from "../types/IReport";
 import { toast } from "react-toastify";
+import IReportLog from "../types/IReportLog";
 
 export interface IProjectContext {
     projects: IProject[];
+    latestReportSubmissions: IReportLog[];
     loading: boolean;
     loadProjects: () => Promise<void>;
     selectProject: (id: number) => Promise<IProject|undefined>;
@@ -16,6 +18,7 @@ export interface IProjectContext {
 
 export const ProjectContext = createContext<IProjectContext>({
     projects: [],
+    latestReportSubmissions: [],
     selectedProjectData: undefined,
     loading: false,
     loadProjects: async () => { },
@@ -38,6 +41,7 @@ interface IProps {
 export const ProjectProvider: React.FC<IProps> = ({ children }) => {
     const REPORT_FREQUENCIES = ["daily", "weekly", "fortnightly", "monthly", "custom"];
     const [projects, setProjects] = useState<IProject[]>([]);
+    const [latestReportSubmissions, setLatestReportSubmissions] = useState<IReportLog[]>([]);
     const [selectedProjectData, setSelectedProjectData] = useState<IProject | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -49,9 +53,13 @@ export const ProjectProvider: React.FC<IProps> = ({ children }) => {
         if (projects.length > 0) return;
 
         const projectsData = await getProjects();
+        const reportSubmissions = await getLatestReportSubmissions();
 
         if (projectsData && projectsData.length > 0) {
             setProjects(projectsData);
+        }
+        if (reportSubmissions && reportSubmissions.length > 0) {
+            setLatestReportSubmissions(reportSubmissions);
         }
     }
 
@@ -71,6 +79,28 @@ export const ProjectProvider: React.FC<IProps> = ({ children }) => {
             }
     
             return projectsData;
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    };
+    const getLatestReportSubmissions = async () => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+    
+        try {
+            const latestReportSubmissions: IReportLog[] | string = await ProjectServices.getLatestReportSubmissions(signal);
+
+    
+            if (latestReportSubmissions === "ABORTED") {
+                return [];
+            }
+    
+            if (typeof latestReportSubmissions === "string") {
+                return [];
+            }
+    
+            return latestReportSubmissions;
         } catch (error) {
             console.error(error);
             return;
@@ -156,7 +186,7 @@ export const ProjectProvider: React.FC<IProps> = ({ children }) => {
     }
 
     return (
-        <ProjectContext.Provider value={{ projects, selectedProjectData, loading, loadProjects, selectProject, createNewProject, assigneMembers }}>
+        <ProjectContext.Provider value={{ projects, latestReportSubmissions, selectedProjectData, loading, loadProjects, selectProject, createNewProject, assigneMembers }}>
             {children}
         </ProjectContext.Provider>
     )

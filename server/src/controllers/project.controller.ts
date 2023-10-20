@@ -75,6 +75,13 @@ class ProjectContoller {
 
         return returner(res, "success", HttpStatusCodes.OK, [...data], "");
     }
+    latestReportSubmissions = async (req: Request, res: Response)=> {
+        const projectId = req.params.id;
+        
+        const data = await this.dbConnection.query("SELECT * FROM v_report_info ORDER BY submission_time DESC LIMIT 10", []);
+
+        return returner(res, "success", HttpStatusCodes.OK, [...data], "");
+    }
 
     getOne = async (req: Request, res: Response)=> {
         const projectId = req.params.id;

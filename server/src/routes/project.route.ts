@@ -27,5 +27,6 @@ projectRouter.get('/:id/members/:memberId/reports', AuthProjectManager.checkUser
 projectRouter.get('/:id/reports', AuthTeamMember.checkUser, projectValidator.teamMemberReports, projectContoller.teamMemberReports);
 projectRouter.post('/:id/reports', AuthTeamMember.checkUser, projectValidator.teamMemberReportSubmit, projectContoller.teamMemberReportSubmit);
 projectRouter.post('/:id/reports/:reportId/toggleread', AuthTeamMember.checkUser, projectValidator.toggleReadReport, projectContoller.toggleReadReport);
+projectRouter.post('/latestReportSubmissions', AuthTeamMember.checkUser, projectContoller.latestReportSubmissions);
 
 export default projectRouter;

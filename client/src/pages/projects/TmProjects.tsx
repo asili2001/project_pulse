@@ -14,7 +14,7 @@ const TmProjects = () => {
     const { loadProjects, projects, loading } = useContext(ProjectContext);
     const [projectsWidgetData, setProjectsWidgetData] = useState<WidgetData[]>([
         {
-            headerTitle: "",
+            headerTitle: "All Projects",
             headerItems: <></>,
             style: { "gridArea": "1/1" },
             content: []
