@@ -5,6 +5,8 @@ import DbConnection from '../src/db/connections/db-connection';
 import request from 'supertest';
 import CryptoHelper from '../src/utils/CryptoHelper';
 import statusCodes from "../src/utils/HttpStatusCodes";
+import util from "util";
+import {exec} from "child_process";
 
 if (!process.env.DB_NAME_MAIN) {
     throw new Error("Inviroment Variable DB_NAME_MAIN needs to be defined");
@@ -32,11 +34,11 @@ const userPass = "mysecretpass";
 
 
 beforeAll(async ()=> {
-    // delete all users from database
-    // await db.query("DELETE FROM reports");
-    // await db.query("DELETE FROM users_n_projects");
-    // await db.query("DELETE FROM users_n_reports");
-    // await db.query("DELETE FROM users");
+    const promiseExec = util.promisify(exec);
+    const {stderr} = await promiseExec("cd ../db && mariadb -h $(hostname).local -udbadm -pP@ssw0rd < ../db/reset_dev.sql && cd ../server/");
+    if (stderr) {
+        console.log('stderr:', stderr);
+    }
 });
 
 test("Create JWT Token and verify it.", ()=> {
@@ -56,6 +58,8 @@ test("Create JWT Token and verify it.", ()=> {
 test("Invite new users:", async ()=> {
     const inviteUsers = await request(app).post('/auth/register').send(userData);
 
+    console.log(inviteUsers.body);
+    
     expect(inviteUsers.body.result[0].message).toBe("success");
     expect(inviteUsers.body.result[1].message).toBe("success");
     

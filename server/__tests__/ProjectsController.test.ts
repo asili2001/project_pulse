@@ -1,11 +1,9 @@
-// import dotenv from 'dotenv';
-// dotenv.config({ path: './.env.dev' });
+import dotenv from 'dotenv';
+dotenv.config({ path: './.env.dev' });
 import {app} from '../src/app';
-import jwt from 'jsonwebtoken';
 import AuthController from '../src/controllers/auth.controller';
 import DbConnection from '../src/db/connections/db-connection';
 import request from 'supertest';
-import CryptoHelper from '../src/utils/CryptoHelper';
 import statusCodes from "../src/utils/HttpStatusCodes";
 
 if (!process.env.DB_NAME_MAIN) {
@@ -27,20 +25,17 @@ const projectData = {
     ]
 };
 
-const userPass = "mysecretpass";
-
-
 beforeAll(async ()=> {
     // delete all projects from database
     await db.query("DELETE FROM projects");
 });
 
 test("Add new project", async ()=> {
-    // const login = await request(app).post('/auth/login').send({email: "ahmadasili1928@gmail.com", password: "12345678"});
-    // const cookies = login.headers['set-cookie'];
-    // console.log(login.body);
+    const login = await request(app).post('/auth/login').send({email: "ahmadasili1928@gmail.com", password: "12345678"});
+    const cookies = login.headers['set-cookie'];
+    console.log("-------------------------------------------->", login.body);
     
-    // expect(login.body.code).toBe(statusCodes.OK);
+    expect(login.body.code).toBe(statusCodes.OK);
 
     
     const newProject = await request(app).post('/projects').set('Cookie', ['myApp-token=12345667', 'myApp-other=blah']).send(projectData);

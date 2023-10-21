@@ -7,3 +7,8 @@
 2023-10-16T09:01:29.235Z: [at loginUser (/home/asili/project_pulse_master/server/src/controllers/auth.controller.ts:181:24)] {"errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"project_pulse_db","fatal":true}
 2023-10-16T09:01:36.309Z: [at loginUser (/home/asili/project_pulse_master/server/src/controllers/auth.controller.ts:181:24)] {"errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"project_pulse_db","fatal":true}
 2023-10-16T09:01:50.142Z: [at loginUser (/home/asili/project_pulse_master/server/src/controllers/auth.controller.ts:181:24)] {"errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"project_pulse_db","fatal":true}
+2023-10-21T11:44:24.842Z: [at CryptoHelper.decrypt (/home/asili/project_pulse_master/server/src/utils/CryptoHelper.ts:53:18)] {"code":"ERR_INVALID_ARG_VALUE"}
+2023-10-21T11:44:26.854Z: [at /home/asili/project_pulse_master/server/src/controllers/auth.controller.ts:131:40] {"errno":-3008,"code":"ENOTFOUND","syscall":"getaddrinfo","hostname":"project_pulse_db","fatal":true}
+2023-10-21T11:44:29.913Z: [at loginUser (/home/asili/project_pulse_master/server/src/controllers/auth.controller.ts:181:24)] {"errno":-3008,"code":"ENOTFOUND","syscall":"getaddrinfo","hostname":"project_pulse_db","fatal":true}
+2023-10-21T11:54:49.735Z: [at CryptoHelper.decrypt (/home/asili/project_pulse_master/server/src/utils/CryptoHelper.ts:53:18)] {"code":"ERR_INVALID_ARG_VALUE"}
+2023-10-21T11:55:35.740Z: [at CryptoHelper.decrypt (/home/asili/project_pulse_master/server/src/utils/CryptoHelper.ts:53:18)] {"code":"ERR_INVALID_ARG_VALUE"}
