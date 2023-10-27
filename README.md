@@ -78,3 +78,6 @@ bash dockerhub.bash
 
 ### Default client port: 5173
 ### Default server port: 1337
+### Default project manager Auth Credentials:
+       Email: ahmadasili1928@gmail.com
+       Pass: 12345678
