@@ -3,7 +3,7 @@
 ## Kursen Individuella projekt
 
 ### Requirements
-- Node
+- NodeJS
 - NPM
 - MariaDB
 
